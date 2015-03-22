@@ -99,3 +99,11 @@ table
   table
     &.container
       width: $container-width-lap !important
+
+    @for $i from 1 through 12
+      $width: ($grid-width-lap - $grid-gutter-lap) + (($i - 1) * $grid-width-lap)
+      &.col-#{$i}
+        width: $width
+
+        center
+          min-width: $width
