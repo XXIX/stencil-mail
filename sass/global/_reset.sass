@@ -1,168 +1,86 @@
-html
-  color: black
-  background: white
-
-body,
-div,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-code,
-form,
-fieldset,
-figure,
-legend,
-input,
-textarea,
-p,
-blockquote,
-th,
-td
-  margin: 0
+#outlook a
   padding: 0
 
-article,
-aside,
-details,
-figcaption,
-figure,
-dialog,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section
-  display:block
-
 body
-  font: 14px/1.0em sans-serif
-  *font-size: small
-  *font: x-small
+  margin: 0
+  min-width: 100%
+  padding: 0
+  -webkit-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%
+  width: 100% !important
 
-table
-  border-collapse: collapse
-  border-spacing: 0
-  font-size: inherit
-  font: 100%
+.ExternalClass
+  width: 100%
 
-fieldset,
-img
-  border: 0
-
-address,
-caption,
-cite,
-code,
-dfn,
-th,
-var
-  font-style: normal
-  font-weight: normal
-
-ol,
-ul
-  list-style: none
-
-caption,
-th
-  text-align: left
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
-  font-size: 100%
-  font-weight: normal
-
-q:before,
-q:after
-  content: ''
-
-abbr,
-acronym
-  border: 0
-  font-variant: normal
-
-sup
-  vertical-align: text-top
-
-sub
-  vertical-align: text-bottom
-
-pre,
-code,
-kbd,
-samp,
-tt
-  font-family: monospace
-  *font-size: 108%
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div
   line-height: 100%
 
-input,
-textarea,
-select
-  font-family: inherit
-  font-size: inherit
-  font-weight: inherit
+#backgroundTable
+  margin: 0
+  padding: 0
+  width: 100% !important
+  line-height: 100% !important
 
-input,
-textarea,
-select
-  *font-size: 100%
+img
+  outline: none;
+  text-decoration: none;
+  -ms-interpolation-mode: bicubic;
+  width: auto;
+  max-width: 100%;
+  float: left;
+  clear: both;
+  display: block;
 
-select,
-input,
-button,
-textarea
-  font: 99% sans-serif
+center
+  min-width: 580px;
+  width: 100%;
 
-legend
-  color: black
+a img
+  border: none;
 
-button
-  @extend %form-reset-button
+p
+  margin: 0 0 0 10px;
 
-input
-  @extend %form-reset-input
+table
+  border-spacing: 0;
+  border-collapse: collapse;
 
-select
-  @extend %form-reset-select
+td
+  border-collapse: collapse !important;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 
-textarea
-  @extend %form-reset-textarea
+table, tr, td
+  padding: 0
+  vertical-align: top
+  text-align: left
 
-label
-  @extend %form-reset-label
+hr
+  background-color: #d9d9d9;
+  border: none;
+  color: #d9d9d9;
+  height: 1px;
 
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-select,
-textarea
-  +border-box
-  line-height: 1.0
-  width: 100%
+body, table.body, h1, h2, h3, h4, h5, h6, p, td
+  color: #333333;
+  line-height: 1.3;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 14px
+  font-weight: normal;
+  margin: 0;
+  padding:0;
+  text-align: left;
+
+h1, h2, h3, h4, h5, h6
+  word-break: normal;
+
+body.outlook
+  p
+    display: inline !important

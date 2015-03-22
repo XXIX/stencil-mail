@@ -1,21 +1,24 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     {% include head %}
   </head>
-  <body>
-    <div class="loader" data-loader></div>
-    <div class="wrapper">
-      <div class="main">
-        {% include 'nav' %}
+  <body marginheight="0" topmargin="0" marginwidth="0" bgcolor="#FFFFFF" leftmargin="0">
+    <table class="body">
+      <tr>
+        <td class="center" align="center" valign="top">
+          <center>
 
-        {% block body %}
-          Default Content
-        {% endblock %}
-      </div>
-    </div>
+          <!-- Email Content -->
+          {% block body %}
+            Default Content
+          {% endblock %}
 
-    {% include 'footer' %}
-    {% include scripts %}
+          {% include foot %}
+
+          </center>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

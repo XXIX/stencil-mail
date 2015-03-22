@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON("package.json")
@@ -10,33 +8,13 @@ module.exports = (grunt) ->
         browsers: ['last 2 versions', 'ie 8', 'ie 9']
       single_file:
         src: '.build/application.css'
-        dest: '.build/application.prefixed.css'
+        dest: '_build/application.css'
 
-    coffee:
-      compileJoined:
-        options:
-          join: true
-        files:
-          '.build/coffee.js': [ 'scripts/**/*.coffee', 'scripts/*.coffee' ]
-
-    concat:
-      dist:
-        src: [
-          "vendor/**/*.js"
-          "vendor/*.js"
-          "scripts/**/*.js"
-          "scripts/*.js"
-          ".build/coffee.js"
+    copy:
+      main:
+        files: [
+          { expand: true, src: ['assets/*'], dest: '_build/', filter: 'isFile' }
         ]
-        dest: "assets/application.js"
-
-    concat_css:
-      all:
-        src: [
-          "vendor/*.css"
-          ".build/application.prefixed.css"
-        ]
-        dest: "assets/application.css"
 
     connect:
       server:
@@ -44,31 +22,22 @@ module.exports = (grunt) ->
           port: 8000
           hostname: 'localhost'
           open: true
-          base: '_site'
+          base: '_build'
           livereload: true
 
-    copy:
+    premailer:
       main:
-        files: [
-          { expand: true, src: ['assets/*'], dest: '_site/', filter: 'isFile' }
-        ]
-
-    cssmin:
-      target:
-        files: 'assets/application.min.css': ['assets/application.css']
-
-    exec:
-      deploy:
-        command: 'git subtree push --prefix _site origin gh-pages'
-        stdout: false
-        stderr: false
+        options:
+          verbose: true
+        files:
+          '_build/index-inline.html': ['_build/index.html']
 
     liquid:
       options:
         includes: './includes'
       pages:
         files: [
-          { expand: true, flatten: true, src: 'templates/*.liquid', dest: '_site/', ext: '.html' }
+          { expand: true, flatten: true, src: 'templates/*', dest: '_build/', ext: '.html' }
         ]
 
     sass:
@@ -77,12 +46,14 @@ module.exports = (grunt) ->
           style: 'expanded'
           sourcemap: 'none'
         files:
-          '.build/application.css': ['sass/application.scss' ]
+          '.build/application.css': ['sass/application.sass' ]
 
-    uglify:
-      build:
-        src: "assets/application.js"
-        dest: "assets/application.min.js"
+    uncss:
+      dist:
+        src: [ '_build/index.html' ]
+        dest: '_build/application.css'
+        options:
+          report: 'min'
 
     watch:
       copy:
@@ -95,14 +66,10 @@ module.exports = (grunt) ->
 
       sass:
         files: [ 'sass/*', 'sass/**/*' ]
-        tasks: [ 'sass', 'autoprefixer', 'concat_css', 'cssmin', 'copy' ]
-
-      scripts:
-        files: [ 'scripts/**/*', 'scripts/*' ]
-        tasks: [ 'coffee', 'concat', 'uglify' ]
+        tasks: [ 'sass', 'autoprefixer', 'copy' ]
 
       livereload:
-        files: [ '_site/**/*' ]
+        files: [ '_build/**/*' ]
         options:
           livereload: true
 
@@ -112,38 +79,33 @@ module.exports = (grunt) ->
         success: true
         duration: 3
 
-  grunt.loadNpmTasks "grunt-contrib-coffee"
-  grunt.loadNpmTasks "grunt-contrib-concat"
-  grunt.loadNpmTasks 'grunt-concat-css'
-  grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-contrib-sass"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-concurrent"
   grunt.loadNpmTasks "grunt-notify"
   grunt.loadNpmTasks "grunt-contrib-connect"
-  grunt.loadNpmTasks "grunt-contrib-cssmin"
-  grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks 'grunt-liquid'
   grunt.loadNpmTasks 'grunt-exec'
   grunt.loadNpmTasks 'grunt-autoprefixer'
+  grunt.loadNpmTasks 'grunt-premailer'
+  grunt.loadNpmTasks 'grunt-uncss'
 
   grunt.registerTask "default", [
     'notify'
+    'liquid'
+    'sass'
     'copy'
     'connect'
     'watch'
   ]
 
-  grunt.registerTask "deploy", [
-    'exec:deploy'
-  ]
-
-  grunt.registerTask "watch_sass", [
-    'watch:sass'
-  ]
-
-  grunt.registerTask "watch_scripts", [
-    'watch:scripts'
+  grunt.registerTask "inline", [
+    'liquid'
+    'sass'
+    'autoprefixer'
+    'uncss'
+    'premailer'
   ]
 
   return

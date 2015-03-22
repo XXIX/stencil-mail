@@ -1,40 +1,56 @@
 .button,
-%button
-  +animate
-  background-color: $color-black
-  border: 1px solid $color-black
-  color: $color-white
-  cursor: pointer
-  height: $button-height
-  line-height: 1.0
-  +padding($horizontal: m)
+.tiny-button,
+.small-button,
+.medium-button,
+.large-button
+  width: 100%
+  overflow: hidden
 
-  &:active,
-  &:hover
-    background-color: $color-white
-    color: $color-black
+  td
+    background: #2ba6cb
+    border: 1px solid #2284a1
+    color: #ffffff
+    display: block
+    padding: 8px 0
+    text-align: center
+    width: auto !important
 
-.button-invert
-  @extend %button
-  background-color: $color-white
-  border-color: $color-white
-  color: $color-black
+    a
+      font-weight: bold
+      text-decoration: none
+      font-family: Helvetica, Arial, sans-serif
+      color: #ffffff
+      font-size: 16px
 
-  &:active,
-  &:hover
-    background-color: $color-black
-    color: $color-white
+  &:hover,
+  &:visited,
+  &:active
+    td
+      background: #2795b6 !important
+      a
+        color: #ffffff !important
 
-.button-neutral
-  @extend %button
-  background-color: transparent
-  border-color: $color-black
-  color: $color-black
+.tiny-button
+  td
+    padding: 5px 0 4px
+    a
+      font-size: 12px
+      font-weight: normal
 
-  &:active,
-  &:hover
-    background-color: $color-black
-    color: $color-white
+.small-button
+  td
+    padding: 8px 0 7px
+    a
+      font-size: 16px
 
-.button[disabled]
-  +opacity(0.5)
+.medium-button
+  td
+    padding: 12px 0 10px
+    a
+      font-size: 20px
+
+.large-button
+  td
+    padding: 21px 0 18px
+    a
+      font-size: 24px
